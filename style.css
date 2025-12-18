@@ -125,13 +125,13 @@ ul { list-style: none; }
   gap: 12px;
 }
 
-/* UPDATED LOGO STYLING */
+/* UPDATED LOGO STYLING (The Badge Look) */
 .logo-img {
-  height: 45px; /* Fixed height */
+  height: 45px;
   width: auto;
-  background-color: #ffffff; /* White background for logo visibility */
-  padding: 4px 8px;          /* Padding to prevent text touching borders */
-  border-radius: 6px;        /* Rounded corners for badge look */
+  background-color: #ffffff; /* White background fixes visibility on dark theme */
+  padding: 4px 8px;          /* Padding prevents text from touching edges */
+  border-radius: 6px;        /* Rounded corners */
   box-shadow: 0 0 15px rgba(109, 179, 63, 0.2); /* Soft green glow */
 }
 
@@ -153,7 +153,7 @@ ul { list-style: none; }
 .nav-links a:hover { color: var(--color-accent); }
 
 /* =========================================
-   5. BUTTONS
+   5. BUTTONS (FIXED SELECTORS)
    ========================================= */
 .btn {
   padding: 12px 28px;
