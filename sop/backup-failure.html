@@ -1,188 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SOP: Backup Failure Recovery | SaXhamOps</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaXhamOps_Backup_Failure_SOP</title>
+    <style>
+        /* =========================================
+           1. PRINT & PAGE SETTINGS
+           ========================================= */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-  <style>
-    /* SOP Specific Overrides for Readability/Print */
-    .sop-container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: rgba(13, 18, 27, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            line-height: 1.5;
+            margin: 0;
+            background: #525659; /* Grey background for browser view */
+        }
 
-    .sop-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #333;
-      padding-bottom: 20px;
-      margin-bottom: 30px;
-    }
+        .page {
+            background: white;
+            width: 210mm; /* A4 Width */
+            min-height: 297mm; /* A4 Height */
+            margin: 20px auto;
+            padding: 20mm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            position: relative;
+            box-sizing: border-box;
+        }
 
-    .meta-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 30px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-    }
+        @media print {
+            body { background: none; -webkit-print-color-adjust: exact; }
+            .page { margin: 0; border: none; width: 100%; box-shadow: none; page-break-after: always; }
+            .no-print { display: none; }
+        }
 
-    .meta-table th, .meta-table td {
-      border: 1px solid #333;
-      padding: 12px;
-      text-align: left;
-    }
+        /* =========================================
+           2. TYPOGRAPHY & UTILS
+           ========================================= */
+        h1 { color: #0f2441; font-size: 28px; margin-bottom: 5px; text-transform: uppercase; }
+        h2 { color: #0f2441; border-bottom: 2px solid #6db33f; padding-bottom: 5px; margin-top: 30px; font-size: 18px; text-transform: uppercase; }
+        h3 { color: #444; font-size: 16px; margin-top: 20px; font-weight: 700; }
+        p, li { font-size: 14px; text-align: justify; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f6f9; color: #0f2441; font-weight: 700; }
+        tr:nth-child(even) { background-color: #fafafa; }
 
-    .meta-table th {
-      background: rgba(255, 255, 255, 0.05);
-      color: #aaa;
-      width: 25%;
-    }
+        .code-block {
+            background: #f1f1f1;
+            border-left: 4px solid #0f2441;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #d63384;
+            margin: 10px 0;
+        }
 
-    .meta-table td {
-      color: #fff;
-    }
+        .alert-box {
+            background: #e7f3fe;
+            border: 1px solid #b6d4fe;
+            color: #084298;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin: 20px 0;
+        }
 
-    h1 { font-family: 'Rajdhani', sans-serif; color: #fff; }
-    h2 { font-family: 'Rajdhani', sans-serif; color: #4facfe; margin-top: 30px; border-left: 4px solid #4facfe; padding-left: 15px; }
-    
-    .sop-content p, .sop-content li {
-      color: #ccc;
-      line-height: 1.6;
-      margin-bottom: 10px;
-    }
+        /* =========================================
+           3. COVER PAGE STYLES
+           ========================================= */
+        .cover-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 90%;
+            text-align: center;
+        }
+        .logo-placeholder {
+            font-size: 40px;
+            font-weight: 800;
+            color: #0f2441;
+            margin-bottom: 50px;
+        }
+        .highlight { color: #6db33f; }
+        .cover-title { font-size: 36px; font-weight: 700; color: #0f2441; margin-bottom: 20px; }
+        .cover-subtitle { font-size: 18px; color: #666; font-weight: 400; margin-bottom: 100px; }
+        .cover-footer {
+            margin-top: auto;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+            font-size: 12px;
+            color: #888;
+        }
 
-    .step-box {
-      background: rgba(255,255,255,0.03);
-      padding: 15px;
-      margin-bottom: 15px;
-      border-left: 2px solid #333;
-    }
+        /* =========================================
+           4. FLOWCHART
+           ========================================= */
+        .flow-step {
+            border: 1px solid #0f2441;
+            padding: 10px;
+            text-align: center;
+            width: 60%;
+            margin: 0 auto;
+            border-radius: 4px;
+            font-weight: 600;
+            background: #fff;
+        }
+        .arrow { text-align: center; font-size: 20px; color: #6db33f; margin: 5px 0; }
 
-    .step-box strong { color: #fff; display: block; margin-bottom: 5px; }
-
-    .warning-text { color: #ff4b4b; }
-
-    /* Print Styles for Auditors */
-    @media print {
-      body { background: #fff; color: #000; }
-      .sop-container { box-shadow: none; border: none; padding: 0; margin: 0; }
-      .meta-table th, .meta-table td { border-color: #ccc; color: #000; }
-      h1, h2, h3, strong { color: #000 !important; }
-      .sop-content p, .sop-content li { color: #000; }
-      .navbar, .bg-glow-1, .bg-glow-2, .btn { display: none; }
-    }
-  </style>
+        /* =========================================
+           5. HEADER/FOOTER (INSIDE PAGES)
+           ========================================= */
+        .doc-header { display: flex; justify-content: space-between; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 20px; }
+        .doc-footer { position: absolute; bottom: 20mm; left: 20mm; right: 20mm; text-align: center; font-size: 10px; color: #aaa; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
 </head>
-<body class="dark-theme">
+<body>
 
-  <div class="sop-container">
-    
-    <header class="sop-header">
-      <div class="brand">
-        <h1 style="margin:0;">SaXhamOps</h1>
-        <span style="color:#666; font-size: 0.9rem;">IT Operations Division</span>
-      </div>
-      <div class="doc-type">
-        <span style="border: 1px solid #4facfe; color: #4facfe; padding: 5px 10px; border-radius: 4px; font-family: 'Rajdhani', sans-serif; font-weight: bold;">OFFICIAL SOP</span>
-      </div>
-    </header>
+    <div class="page">
+        <div class="cover-container">
+            <div class="logo-placeholder">
+                SaXham<span class="highlight">Ops</span>
+            </div>
+            
+            <div class="cover-title">Backup Failure Handling SOP</div>
+            <div class="cover-subtitle">Standard Operating Procedure for Daily IT Operations<br>Linux & Windows Environments</div>
 
-    <table class="meta-table">
-      <tr>
-        <th>Document Title</th>
-        <td><strong>Backup Failure Recovery Protocol</strong></td>
-        <th>Document ID</th>
-        <td>SOP-OPS-BK-001</td>
-      </tr>
-      <tr>
-        <th>Process Owner</th>
-        <td>Nitin Pawar (SaXhamAI)</td>
-        <th>Last Updated</th>
-        <td>18 Dec 2025</td>
-      </tr>
-      <tr>
-        <th>Applicability</th>
-        <td>Linux/Windows Servers</td>
-        <th>Version</th>
-        <td>1.0 (Audit Ready)</td>
-      </tr>
-    </table>
+            <div style="margin-top: 50px;">
+                <table style="width: 60%; margin: 0 auto; text-align: left;">
+                    <tr>
+                        <th style="background: #fff; border:none; width: 40%;">Document ID:</th>
+                        <td style="border:none;">SOP-OPS-BK-01</td>
+                    </tr>
+                    <tr>
+                        <th style="background: #fff; border:none;">Version:</th>
+                        <td style="border:none;">1.0</td>
+                    </tr>
+                    <tr>
+                        <th style="background: #fff; border:none;">Date:</th>
+                        <td style="border:none;">18 Dec 2025</td>
+                    </tr>
+                </table>
+            </div>
 
-    <div class="sop-content">
-      
-      <h2>1. Purpose</h2>
-      <p>To define the standard procedure for identifying, troubleshooting, and resolving backup failures in the trading infrastructure, ensuring zero data loss and compliance with audit requirements.</p>
-
-      <h2>2. Scope</h2>
-      <p>This SOP applies to all L1 and L2 Support Engineers monitoring the Daily Operations Dashboard. It covers SQL Dumps, File System Backups, and Mirror Sync issues.</p>
-
-      <h2>3. Responsibility Matrix</h2>
-      <ul>
-        <li><strong>L1 Engineer:</strong> Detection, Initial Retry, Ticket Logging.</li>
-        <li><strong>L2 Engineer:</strong> Log Analysis, Space Management, Script Debugging.</li>
-        <li><strong>IT Manager:</strong> Critical Data Loss Reporting, Audit Explanation.</li>
-      </ul>
-
-      <h2>4. Step-by-Step Procedure</h2>
-
-      <div class="step-box">
-        <strong>Step 1: Verification</strong>
-        <p>Do not rely solely on the dashboard alert. Login to the server and verify the physical file existence in <code>/backup/daily/</code>.</p>
-      </div>
-
-      <div class="step-box">
-        <strong>Step 2: Log Analysis</strong>
-        <p>Check the automation logs located at <code>C:\SaXhamOps\Logs\</code> (Windows) or <code>/var/log/saxham_backup.log</code> (Linux). Look for "Space Insufficient" or "Locked File" errors.</p>
-      </div>
-
-      <div class="step-box">
-        <strong>Step 3: Corrective Action</strong>
-        <ul>
-          <li>If <strong>Space Issue</strong>: Clear old temp files (refer to SOP-CLEAN-02).</li>
-          <li>If <strong>Service Stuck</strong>: Restart the SQL Writer / Cron Service.</li>
-          <li>If <strong>Network Issue</strong>: Ping the NAS storage IP.</li>
-        </ul>
-      </div>
-
-      <div class="step-box">
-        <strong>Step 4: Manual Execution</strong>
-        <p>Run the backup script manually: <code>./manual_backup.sh --force</code>. Wait for the "SUCCESS" echo.</p>
-      </div>
-
-      <div class="step-box">
-        <strong>Step 5: Documentation</strong>
-        <p>Update the Daily Ops Dashboard with the resolution note. <span class="warning-text">Failure to log the resolution is a compliance violation.</span></p>
-      </div>
-
-      <h2>5. Escalation Matrix</h2>
-      <p>If the backup fails after Step 4, escalate immediately via WhatsApp Group "Ops-Critical":</p>
-      <ul>
-        <li><strong>Level 1:</strong> Shift Lead (Within 15 mins)</li>
-        <li><strong>Level 2:</strong> Nitin Pawar (Within 30 mins)</li>
-      </ul>
-
-      <hr style="border-color:#333; margin-top:40px;">
-      <p style="font-size: 0.8rem; text-align: center; color: #555;">
-        &copy; 2025 SaXhamAI. Internal Use Only. Controlled Document.
-      </p>
-
+            <div class="cover-footer">
+                <p><strong>Prepared by:</strong> SaXhamOps Team | A Product of SaxhamAi</p>
+                <p style="color: #d9534f;">CONFIDENTIAL – FOR INTERNAL IT USE ONLY</p>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <div class="page">
+        <div class="doc-header">
+            <strong>Backup Failure Handling SOP</strong>
+            <span>ID: SOP-OPS-BK-01</span>
+        </div>
+
+        <h2>1. Purpose</h2>
+        <p>This SOP defines a standard process to identify, analyze, and resolve backup failures in the IT infrastructure. The goal is to ensure data integrity, regulatory compliance, and business continuity by minimizing the Mean Time To Resolve (MTTR) for backup incidents.</p>
+
+        <h2>2. Scope</h2>
+        <p>This procedure applies to the following environments:</p>
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li>☑️ <strong>Linux Servers:</strong> RHEL, CentOS, Ubuntu</li>
+            <li>☑️ <strong>Windows Servers:</strong> 2016, 2019, 2022</li>
+            <li>☑️ <strong>Database Backups:</strong> MSSQL, MySQL, PostgreSQL</li>
+            <li>☑️ <strong>Storage Targets:</strong> Local Disk, NAS, Cloud (AWS S3/Azure Blob)</li>
+        </ul>
+
+        <h2>3. Responsibility Matrix</h2>
+        <table>
+            <tr>
+                <th style="width: 25%;">Role</th>
+                <th>Responsibility</th>
+            </tr>
+            <tr>
+                <td>L1 Support</td>
+                <td>Daily dashboard monitoring, verification, initial retry, ticket logging.</td>
+            </tr>
+            <tr>
+                <td>L2 Support</td>
+                <td>Log analysis, space clearing, script debugging, manual execution.</td>
+            </tr>
+            <tr>
+                <td>SysAdmin</td>
+                <td>Root cause analysis (RCA), configuration changes, policy updates.</td>
+            </tr>
+            <tr>
+                <td>IT Manager</td>
+                <td>Escalation handling, compliance reporting, audit sign-off.</td>
+            </tr>
+        </table>
+
+        <h2>4. Common Failure Types</h2>
+        <table>
+            <tr>
+                <th>Failure Type</th>
+                <th>Example / Symptom</th>
+            </tr>
+            <tr>
+                <td>Space Issue</td>
+                <td>Disk usage > 95%, "No space left on device" error.</td>
+            </tr>
+            <tr>
+                <td>Permission Issue</td>
+                <td>"Access Denied", "Read-only file system", User password expired.</td>
+            </tr>
+            <tr>
+                <td>Service Issue</td>
+                <td>SQL Writer Service stopped, Cron daemon stuck.</td>
+            </tr>
+            <tr>
+                <td>Network Issue</td>
+                <td>NAS IP unreachable, VPN tunnel disconnected.</td>
+            </tr>
+            <tr>
+                <td>File Lock</td>
+                <td>Database in use, "File is being used by another process".</td>
+            </tr>
+        </table>
+
+        <div class="doc-footer">
+            &copy; 2025 SaXhamOps – Daily IT Ops Simplified | Page 2
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="doc-header">
+            <strong>Backup Failure Handling SOP</strong>
+            <span>ID: SOP-OPS-BK-01</span>
+        </div>
+
+        <h2>5. Daily Backup Verification Checklist</h2>
+        <p>Before declaring a backup "Success", the L1 Engineer must verify:</p>
+        <ul class="checklist">
+            <li>✅ Backup job status shows "Completed" in console/logs.</li>
+            <li>✅ <strong>File Size:</strong> Matches expected size (compare with previous day).</li>
+            <li>✅ <strong>Timestamp:</strong> File created within the last 24 hours.</li>
+            <li>✅ <strong>Logs:</strong> Check `backup.log` for hidden errors or warnings.</li>
+            <li>✅ <strong>Offsite Copy:</strong> Verify file exists on DR/NAS location.</li>
+        </ul>
+
+        <h2>6. Failure Handling Flow</h2>
+        <div style="background: #f9f9f9; padding: 20px; border-radius: 8px;">
+            <div class="flow-step">1. Identify Failure (Check Logs)</div>
+            <div class="arrow">⬇</div>
+            <div class="flow-step">2. Validate (Space / Services)</div>
+            <div class="arrow">⬇</div>
+            <div class="flow-step">3. Immediate Fix (Restart / Clean)</div>
+            <div class="arrow">⬇</div>
+            <div class="flow-step">4. Manual Retry (Force Backup)</div>
+            <div class="arrow">⬇</div>
+            <div class="flow-step">5. Verify & Update Dashboard</div>
+        </div>
+
+        <h2>7. Technical Commands (Quick Reference)</h2>
+        
+        <h3>Linux Environments</h3>
+        <div class="code-block">
+# Check Disk Space
+df -h
+
+# Check Service Status
+systemctl status cron
+systemctl status mysqld
+
+# Check Logs
+tail -n 50 /var/log/saxham_backup.log
+
+# List Backup Files
+ls -lh /backup/daily/
+        </div>
+
+        <h3>Windows Environments</h3>
+        <div class="code-block">
+# Powershell: Check Disk
+Get-PSDrive C, D
+
+# Powershell: Check Service
+Get-Service -Name "SQLWriter"
+
+# Check Event Viewer
+eventvwr.msc > Windows Logs > Application
+        </div>
+
+        <div class="doc-footer">
+            &copy; 2025 SaXhamOps – Daily IT Ops Simplified | Page 3
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="doc-header">
+            <strong>Backup Failure Handling SOP</strong>
+            <span>ID: SOP-OPS-BK-01</span>
+        </div>
+
+        <h2>8. Escalation Matrix</h2>
+        <table>
+            <tr>
+                <th>Time Elapsed</th>
+                <th>Action Required</th>
+                <th>Owner</th>
+            </tr>
+            <tr>
+                <td>0 – 30 Mins</td>
+                <td>Troubleshoot using SOP steps. Retry backup.</td>
+                <td>L1 Engineer</td>
+            </tr>
+            <tr>
+                <td>30 – 60 Mins</td>
+                <td>Escalate if technical error persists (Script/OS issue).</td>
+                <td>SysAdmin / L2</td>
+            </tr>
+            <tr>
+                <td>> 1 Hour</td>
+                <td>Inform Manager. Risk of Data Loss.</td>
+                <td>IT Head</td>
+            </tr>
+        </table>
+
+        <h2>9. Communication Template</h2>
+        <p>Use this format for WhatsApp or Email reporting:</p>
+        <div style="border: 1px dashed #999; padding: 15px; background: #fff;">
+            <strong>Subject:</strong> 🔴 Backup Failure Alert – [Server Name]<br><br>
+            <strong>Time:</strong> [Date & Time]<br>
+            <strong>Server:</strong> [IP / Hostname]<br>
+            <strong>Issue Identified:</strong> [e.g., Disk Full / Service Stopped]<br>
+            <strong>Action Taken:</strong> [e.g., Cleared temp logs, Restarted SQL Writer]<br>
+            <strong>Current Status:</strong> [✅ Resolved / ⚠️ Retrying / ❌ Needs Assistance]
+        </div>
+
+        <h2>10. Compliance & Audit Notes</h2>
+        <ul>
+            <li>Backup logs must be retained for <strong>90 days</strong>.</li>
+            <li>Any "Skipped" backup is considered a Failure for audit purposes.</li>
+            <li>Manual retries must be documented in the Daily Operations Report.</li>
+        </ul>
+
+        <div class="alert-box">
+            <strong>🚀 Pro Tip:</strong> This SOP process is fully automated in the <strong>SaXhamOps SME Pack</strong>. 
+            Our scripts auto-detect failures, attempt self-healing, and send WhatsApp alerts instantly.
+        </div>
+
+        <div style="text-align: center; margin-top: 50px; font-size: 12px; color: #888;">
+            <p>End of Document</p>
+            <p>www.saxhamai.com</p>
+        </div>
+
+        <div class="doc-footer">
+            &copy; 2025 SaXhamOps – Daily IT Ops Simplified | Page 4
+        </div>
+    </div>
 
 </body>
 </html>
