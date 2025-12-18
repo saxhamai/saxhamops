@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SaXhamOps | Next-Gen IT Operations for SMEs</title>
+  <meta name="theme-color" content="#050b14">
+  
+  <title>SaXhamOps | Daily IT Ops. Simplified.</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,8 +23,10 @@
   <nav class="navbar">
     <div class="container nav-container">
       <div class="logo">
+        <img src="logo.png" alt="SaXhamOps Shield" class="logo-img">
         <span class="logo-text">SaXham<span class="highlight">Ops</span></span>
       </div>
+      
       <ul class="nav-links">
         <li><a href="#problems">Challenges</a></li>
         <li><a href="#solutions">Solutions</a></li>
@@ -40,7 +44,7 @@
         <div class="badge">For Indian SMEs & Brokers</div>
         <h1>Daily IT Ops. <br><span class="gradient-text">Automated & Simplified.</span></h1>
         <p>
-          Eliminate downtime with ready-made **Linux/Windows runbooks**, automation scripts, 
+          Eliminate downtime with ready-made <strong>Linux/Windows runbooks</strong>, automation scripts, 
           and instant WhatsApp alerts. Stop relying on memory; start relying on code.
         </p>
         <div class="buttons">
@@ -199,10 +203,12 @@
         <div class="cta-content">
           <h2>Deploy Your First SOP Today</h2>
           <p>Download the exact <strong>Backup Failure Protocol</strong> used by top Indian brokers. Free forever.</p>
-          <form class="cta-form">
+          
+          <form class="cta-form" onsubmit="event.preventDefault(); alert('Thank you! The SOP download link has been sent to your email.');">
             <input type="email" placeholder="Enter your business email" required>
             <button type="submit" class="btn primary-btn">Download SOP <i class="fas fa-download"></i></button>
           </form>
+          
         </div>
       </div>
     </div>
@@ -242,8 +248,11 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <h3>SaXhamOps</h3>
-          <p>Daily IT Ops. Simplified.</p>
+          <div class="logo">
+             <img src="logo.png" alt="SaXhamOps" class="logo-img" style="height: 28px;">
+             <span class="logo-text" style="font-size: 1.4rem;">SaXham<span class="highlight">Ops</span></span>
+          </div>
+          <p style="margin-top: 10px;">Daily IT Ops. Simplified.</p>
           <p class="dim">A product of <span class="highlight">SaxhamAi</span></p>
         </div>
         <div class="footer-contact">
