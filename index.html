@@ -45,11 +45,11 @@
         <h1>Daily IT Ops. <br><span class="gradient-text">Automated & Simplified.</span></h1>
         <p>
           Eliminate downtime with ready-made <strong>Linux/Windows runbooks</strong>, automation scripts, 
-          and instant WhatsApp alerts. Stop relying on memory; start relying on code.
+          and instant WhatsApp alerts. Stop relying on memory; start relying on standard processes and automation.
         </p>
         <div class="buttons">
           <a href="#free" class="btn primary-btn glow-effect">Get Free SOP <i class="fas fa-arrow-right"></i></a>
-          <a href="#demo" class="btn outline-btn">View Demo</a>
+          <a href="https://wa.me/919325750093?text=Hi%2C%20I%20want%20to%20request%20a%20demo%20of%20SaXhamOps" class="btn outline-btn">Request Demo</a>
         </div>
       </div>
       
@@ -263,7 +263,8 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 SaXhamOps. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> SaXhamOps. All rights reserved.</p>
+        <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
       </div>
     </div>
   </footer>
