@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SOP: Backup Failure Recovery | SaXhamOps</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    /* SOP Specific Overrides for Readability/Print */
+    .sop-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(13, 18, 27, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    .sop-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #333;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .meta-table th, .meta-table td {
+      border: 1px solid #333;
+      padding: 12px;
+      text-align: left;
+    }
+
+    .meta-table th {
+      background: rgba(255, 255, 255, 0.05);
+      color: #aaa;
+      width: 25%;
+    }
+
+    .meta-table td {
+      color: #fff;
+    }
+
+    h1 { font-family: 'Rajdhani', sans-serif; color: #fff; }
+    h2 { font-family: 'Rajdhani', sans-serif; color: #4facfe; margin-top: 30px; border-left: 4px solid #4facfe; padding-left: 15px; }
+    
+    .sop-content p, .sop-content li {
+      color: #ccc;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .step-box {
+      background: rgba(255,255,255,0.03);
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 2px solid #333;
+    }
+
+    .step-box strong { color: #fff; display: block; margin-bottom: 5px; }
+
+    .warning-text { color: #ff4b4b; }
+
+    /* Print Styles for Auditors */
+    @media print {
+      body { background: #fff; color: #000; }
+      .sop-container { box-shadow: none; border: none; padding: 0; margin: 0; }
+      .meta-table th, .meta-table td { border-color: #ccc; color: #000; }
+      h1, h2, h3, strong { color: #000 !important; }
+      .sop-content p, .sop-content li { color: #000; }
+      .navbar, .bg-glow-1, .bg-glow-2, .btn { display: none; }
+    }
+  </style>
+</head>
+<body class="dark-theme">
+
+  <div class="sop-container">
+    
+    <header class="sop-header">
+      <div class="brand">
+        <h1 style="margin:0;">SaXhamOps</h1>
+        <span style="color:#666; font-size: 0.9rem;">IT Operations Division</span>
+      </div>
+      <div class="doc-type">
+        <span style="border: 1px solid #4facfe; color: #4facfe; padding: 5px 10px; border-radius: 4px; font-family: 'Rajdhani', sans-serif; font-weight: bold;">OFFICIAL SOP</span>
+      </div>
+    </header>
+
+    <table class="meta-table">
+      <tr>
+        <th>Document Title</th>
+        <td><strong>Backup Failure Recovery Protocol</strong></td>
+        <th>Document ID</th>
+        <td>SOP-OPS-BK-001</td>
+      </tr>
+      <tr>
+        <th>Process Owner</th>
+        <td>Nitin Pawar (SaXhamAI)</td>
+        <th>Last Updated</th>
+        <td>18 Dec 2025</td>
+      </tr>
+      <tr>
+        <th>Applicability</th>
+        <td>Linux/Windows Servers</td>
+        <th>Version</th>
+        <td>1.0 (Audit Ready)</td>
+      </tr>
+    </table>
+
+    <div class="sop-content">
+      
+      <h2>1. Purpose</h2>
+      <p>To define the standard procedure for identifying, troubleshooting, and resolving backup failures in the trading infrastructure, ensuring zero data loss and compliance with audit requirements.</p>
+
+      <h2>2. Scope</h2>
+      <p>This SOP applies to all L1 and L2 Support Engineers monitoring the Daily Operations Dashboard. It covers SQL Dumps, File System Backups, and Mirror Sync issues.</p>
+
+      <h2>3. Responsibility Matrix</h2>
+      <ul>
+        <li><strong>L1 Engineer:</strong> Detection, Initial Retry, Ticket Logging.</li>
+        <li><strong>L2 Engineer:</strong> Log Analysis, Space Management, Script Debugging.</li>
+        <li><strong>IT Manager:</strong> Critical Data Loss Reporting, Audit Explanation.</li>
+      </ul>
+
+      <h2>4. Step-by-Step Procedure</h2>
+
+      <div class="step-box">
+        <strong>Step 1: Verification</strong>
+        <p>Do not rely solely on the dashboard alert. Login to the server and verify the physical file existence in <code>/backup/daily/</code>.</p>
+      </div>
+
+      <div class="step-box">
+        <strong>Step 2: Log Analysis</strong>
+        <p>Check the automation logs located at <code>C:\SaXhamOps\Logs\</code> (Windows) or <code>/var/log/saxham_backup.log</code> (Linux). Look for "Space Insufficient" or "Locked File" errors.</p>
+      </div>
+
+      <div class="step-box">
+        <strong>Step 3: Corrective Action</strong>
+        <ul>
+          <li>If <strong>Space Issue</strong>: Clear old temp files (refer to SOP-CLEAN-02).</li>
+          <li>If <strong>Service Stuck</strong>: Restart the SQL Writer / Cron Service.</li>
+          <li>If <strong>Network Issue</strong>: Ping the NAS storage IP.</li>
+        </ul>
+      </div>
+
+      <div class="step-box">
+        <strong>Step 4: Manual Execution</strong>
+        <p>Run the backup script manually: <code>./manual_backup.sh --force</code>. Wait for the "SUCCESS" echo.</p>
+      </div>
+
+      <div class="step-box">
+        <strong>Step 5: Documentation</strong>
+        <p>Update the Daily Ops Dashboard with the resolution note. <span class="warning-text">Failure to log the resolution is a compliance violation.</span></p>
+      </div>
+
+      <h2>5. Escalation Matrix</h2>
+      <p>If the backup fails after Step 4, escalate immediately via WhatsApp Group "Ops-Critical":</p>
+      <ul>
+        <li><strong>Level 1:</strong> Shift Lead (Within 15 mins)</li>
+        <li><strong>Level 2:</strong> Nitin Pawar (Within 30 mins)</li>
+      </ul>
+
+      <hr style="border-color:#333; margin-top:40px;">
+      <p style="font-size: 0.8rem; text-align: center; color: #555;">
+        &copy; 2025 SaXhamAI. Internal Use Only. Controlled Document.
+      </p>
+
+    </div>
+  </div>
+
+</body>
+</html>
