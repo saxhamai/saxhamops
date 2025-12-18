@@ -255,6 +255,89 @@
     </div>
   </section>
 
+  <section id="contact" class="section bg-glass">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Start Your Transformation</h2>
+        <p class="subtitle">Fill the details below. We will send you the complete plan & pricing.</p>
+      </div>
+
+      <div class="enquiry-box">
+        <form id="enquiryForm" class="enquiry-form">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" id="name" placeholder="Ex: Rahul Sharma" required>
+            </div>
+            <div class="form-group">
+              <label>Company / Firm Name</label>
+              <input type="text" id="company" placeholder="Ex: Alpha Trading Solutions" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Mobile Number</label>
+              <input type="tel" id="mobile" placeholder="+91 98765 43210" required>
+            </div>
+            <div class="form-group">
+              <label>Interested In</label>
+              <select id="interest">
+                <option value="SME Core Pack">SME Core Pack (₹499/mo)</option>
+                <option value="Broker Ops Pack">Broker Ops Pack (₹999/mo)</option>
+                <option value="MSP Toolkit">MSP Toolkit (For Vendors)</option>
+                <option value="Custom Requirement">Custom Requirement</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Specific Requirements / Message</label>
+            <textarea id="message" rows="4" placeholder="Need automation for 5 servers..."></textarea>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn primary-btn" style="width: 100%; max-width: 400px;">
+              <i class="fas fa-paper-plane"></i> Send Enquiry to Founder
+            </button>
+            <p style="margin-top: 15px; font-size: 0.85rem; color: #94a3b8;">
+              <i class="fas fa-lock"></i> Your details are sent directly to founder@saxhamai.com
+            </p>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('enquiryForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // 1. Get Values
+      const name = document.getElementById('name').value;
+      const company = document.getElementById('company').value;
+      const mobile = document.getElementById('mobile').value;
+      const interest = document.getElementById('interest').value;
+      const message = document.getElementById('message').value;
+      
+      // 2. Format Email Body
+      const subject = `Enquiry: ${interest} - ${company}`;
+      const body = `Hi Team SaXhamOps,%0D%0A%0D%0A` +
+                   `I am interested in: ${interest}%0D%0A%0D%0A` +
+                   `--- Client Details ---%0D%0A` +
+                   `Name: ${name}%0D%0A` +
+                   `Company: ${company}%0D%0A` +
+                   `Mobile: ${mobile}%0D%0A` +
+                   `Message: ${message}%0D%0A%0D%0A` +
+                   `Please send me more details and pricing.`;
+
+      // 3. Open Mail Client
+      window.location.href = `mailto:founder@saxhamai.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
