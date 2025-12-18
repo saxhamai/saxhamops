@@ -3,151 +3,260 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SaXhamOps | Daily IT Ops. Simplified.</title>
+  <title>SaXhamOps | Next-Gen IT Operations for SMEs</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dark-theme">
 
-  <!-- HEADER WITH LOGO -->
-  <header class="header">
-    <img src="logo.png" alt="SaXhamOps Logo">
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <span class="logo-text">SaXham<span class="highlight">Ops</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#problems">Challenges</a></li>
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#pricing">Packs</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="https://wa.me/919325750093" class="btn secondary-btn"><i class="fab fa-whatsapp"></i> Talk to Expert</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge">For Indian SMEs & Brokers</div>
+        <h1>Daily IT Ops. <br><span class="gradient-text">Automated & Simplified.</span></h1>
+        <p>
+          Eliminate downtime with ready-made **Linux/Windows runbooks**, automation scripts, 
+          and instant WhatsApp alerts. Stop relying on memory; start relying on code.
+        </p>
+        <div class="buttons">
+          <a href="#free" class="btn primary-btn glow-effect">Get Free SOP <i class="fas fa-arrow-right"></i></a>
+          <a href="#demo" class="btn outline-btn">View Demo</a>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="title">saxham_monitor.sh</span>
+          </div>
+          <div class="terminal-body">
+            <p class="code-line"><span class="cmd">> checking server_status...</span> <span class="success">OK</span></p>
+            <p class="code-line"><span class="cmd">> verifying_backups...</span> <span class="success">VERIFIED</span></p>
+            <p class="code-line"><span class="cmd">> database_integrity...</span> <span class="success">100%</span></p>
+            <p class="code-line"><span class="cmd">> alert_status...</span> <span class="warning">WhatsApp Msg Sent</span></p>
+            <div class="cursor">_</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Daily IT Ops. Simplified.</h1>
-    <p>
-      Ready-made IT operations runbooks, automation scripts,  
-      and WhatsApp alerts for Indian SMEs and brokers.
-    </p>
-    <div class="buttons">
-      <a href="#free" class="btn primary">Get Free SOP</a>
-      <a href="https://wa.me/919325750093" class="btn secondary">Talk on WhatsApp</a>
+  <section id="problems" class="section">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Why IT Ops Break Today</h2>
+        <p class="subtitle">Manual processes are the enemy of uptime.</p>
+      </div>
+      
+      <div class="grid-3">
+        <div class="feature-card warning-card">
+          <div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Ops on WhatsApp</h3>
+          <p>Critical updates get lost in chat history. No tracking, no accountability.</p>
+        </div>
+        <div class="feature-card warning-card">
+          <div class="icon-box"><i class="fas fa-brain"></i></div>
+          <h3>Reliance on Memory</h3>
+          <p>Staff forgets one check, and the backup fails silently for weeks.</p>
+        </div>
+        <div class="feature-card warning-card">
+          <div class="icon-box"><i class="fas fa-server"></i></div>
+          <h3>Panic Mode</h3>
+          <p>When VPNs or servers crash, there is no SOP to fix it quickly.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- PROBLEM -->
-  <section class="section light">
-    <h2>Why IT Operations Break in Indian SMEs</h2>
-    <ul class="points">
-      <li>IT ops run on WhatsApp & memory</li>
-      <li>No standard SOPs or daily checks</li>
-      <li>Backup failures discovered too late</li>
-      <li>VPN & server issues cause panic</li>
-      <li>Audits handled at the last minute</li>
-    </ul>
-    <p class="note">This leads to outages, stress, and loss of trust.</p>
+  <section id="solutions" class="section bg-glass">
+    <div class="container">
+      <div class="row align-center">
+        <div class="col-text">
+          <h2>The SaXhamOps Ecosystem</h2>
+          <p class="lead">We replace chaos with engineering.</p>
+          
+          <ul class="checklist">
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>Battle-Tested Runbooks (SOPs)</strong>
+                <p>Step-by-step guides for Backup failures, VPN crashes & EOD processes.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-robot"></i>
+              <div>
+                <strong>Smart Automation Scripts</strong>
+                <p>Linux/Windows scripts that auto-check disk usage, services, and backups.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-file-invoice"></i>
+              <div>
+                <strong>Audit-Ready Reports</strong>
+                <p>Daily PDF reports for owners and management. Professional & transparent.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-visual">
+          <div class="tech-graphic">
+             <i class="fas fa-cogs main-icon"></i>
+             <div class="floating-icon i1"><i class="fab fa-linux"></i></div>
+             <div class="floating-icon i2"><i class="fab fa-windows"></i></div>
+             <div class="floating-icon i3"><i class="fab fa-whatsapp"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- WHAT YOU GET -->
+  <section id="pricing" class="section">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Choose Your Ops Architecture</h2>
+        <p class="subtitle">Scalable solutions for every stage of business.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>SME Core</h3>
+          <div class="price">₹499<span class="period">/mo</span></div>
+          <p class="desc">For small teams needing stability.</p>
+          <hr>
+          <ul>
+            <li><i class="fas fa-check"></i> Daily IT Ops Checklist</li>
+            <li><i class="fas fa-check"></i> Backup & Server SOPs</li>
+            <li><i class="fas fa-check"></i> Basic Monitoring Scripts</li>
+            <li><i class="fas fa-check"></i> WhatsApp Alerts</li>
+          </ul>
+          <a href="#" class="btn outline-btn full-width">Select Pack</a>
+        </div>
+
+        <div class="price-card popular">
+          <div class="ribbon">Best Value</div>
+          <h3>Broker / Trading Ops</h3>
+          <div class="price">₹999<span class="period">/mo</span></div>
+          <p class="desc">Critical uptime for financial firms.</p>
+          <hr>
+          <ul>
+            <li><i class="fas fa-check"></i> Everything in Core</li>
+            <li><i class="fas fa-check"></i> BOD / EOD Checklists</li>
+            <li><i class="fas fa-check"></i> Exchange Connectivity SOPs</li>
+            <li><i class="fas fa-check"></i> Compliance Reports</li>
+          </ul>
+          <a href="#" class="btn primary-btn full-width">Select Pack</a>
+        </div>
+
+        <div class="price-card">
+          <h3>MSP Toolkit</h3>
+          <div class="price">₹2,499<span class="period">/mo</span></div>
+          <p class="desc">For IT Service Providers.</p>
+          <hr>
+          <ul>
+            <li><i class="fas fa-check"></i> Multi-Client License</li>
+            <li><i class="fas fa-check"></i> White-label Reports</li>
+            <li><i class="fas fa-check"></i> Full Automation Suite</li>
+            <li><i class="fas fa-check"></i> Priority Setup Support</li>
+          </ul>
+          <a href="#" class="btn outline-btn full-width">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="free" class="section cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <div class="cta-content">
+          <h2>Deploy Your First SOP Today</h2>
+          <p>Download the exact <strong>Backup Failure Protocol</strong> used by top Indian brokers. Free forever.</p>
+          <form class="cta-form">
+            <input type="email" placeholder="Enter your business email" required>
+            <button type="submit" class="btn primary-btn">Download SOP <i class="fas fa-download"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
-    <h2>What SaXhamOps Gives You</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Runbooks (SOPs)</h3>
-        <p>
-          Step-by-step instructions for backup failures,
-          server downtime, VPN issues, and BOD/EOD processes.
-        </p>
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Deployment Workflow</h2>
       </div>
-      <div class="card">
-        <h3>Automation Scripts</h3>
-        <p>
-          Linux & Windows scripts that check backups,
-          disk usage, services, and send WhatsApp alerts.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Reports</h3>
-        <p>
-          Daily and weekly reports that owners,
-          auditors, and management understand.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PACKS -->
-  <section class="section light">
-    <h2>Ops Packs</h2>
-
-    <div class="cards">
-      <div class="card">
-        <h3>SME Core Pack</h3>
-        <ul>
-          <li>Daily IT Ops checklist</li>
-          <li>Backup & server SOPs</li>
-          <li>Linux & Windows scripts</li>
-          <li>WhatsApp alerts</li>
-        </ul>
-        <p class="price">₹499 – ₹999 / month</p>
-      </div>
-
-      <div class="card">
-        <h3>Broker / Trading Ops Pack</h3>
-        <ul>
-          <li>BOD / EOD checklists</li>
-          <li>Exchange-related SOPs</li>
-          <li>Feed & infra checks</li>
-          <li>Compliance-ready reports</li>
-        </ul>
-        <p class="price">₹999 – ₹1,999 / month</p>
-      </div>
-
-      <div class="card">
-        <h3>MSP Toolkit</h3>
-        <ul>
-          <li>All packs included</li>
-          <li>White-label reports</li>
-          <li>Multi-client usage</li>
-          <li>Setup support</li>
-        </ul>
-        <p class="price">₹2,499+ / month</p>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h4>Select Pack</h4>
+          <p>Choose the Ops Pack that fits your infra size.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h4>Deploy Scripts</h4>
+          <p>Install our lightweight scripts on your servers.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h4>Get Alerts</h4>
+          <p>Receive real-time health updates on WhatsApp.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">04</div>
+          <h4>Stay Compliant</h4>
+          <p>Auto-generate reports for auditors effortlessly.</p>
+        </div>
       </div>
     </div>
-
-    <p class="note">Customization & setup available</p>
   </section>
 
-  <!-- FREE SOP -->
-  <section class="section" id="free">
-    <h2>Get a Free IT Ops SOP</h2>
-    <p>
-      Download a real-world SOP used by Indian IT teams
-      to handle backup failures and daily operations.
-    </p>
-    <a href="#" class="btn primary">Download Free SOP</a>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="section light">
-    <h2>How SaXhamOps Works</h2>
-    <ol class="steps">
-      <li>Choose an Ops Pack</li>
-      <li>Download SOPs & scripts</li>
-      <li>Configure alerts</li>
-      <li>Run daily checks</li>
-      <li>Stay audit-ready</li>
-    </ol>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="section">
-    <h2>Talk to Us</h2>
-    <p>
-      Want to standardize your IT operations
-      without complex tools?
-    </p>
-    <a href="https://wa.me/919325750093" class="btn primary">
-      📲 Chat on WhatsApp
-    </a>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p><strong>SaXhamOps</strong> – Daily IT Ops. Simplified.</p>
-    <p>A product of SaxhamAi</p>
-    <p>Email: ops@saxhamai.com</p>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>SaXhamOps</h3>
+          <p>Daily IT Ops. Simplified.</p>
+          <p class="dim">A product of <span class="highlight">SaxhamAi</span></p>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p><i class="fas fa-envelope"></i> ops@saxhamai.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> Navi Mumbai, India</p>
+          <a href="https://wa.me/919325750093" class="social-link"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 SaXhamOps. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 
 </body>
