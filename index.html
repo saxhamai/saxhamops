@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,6 +16,7 @@
   
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="dark-theme">
 
   <div class="bg-glow-1"></div>
@@ -23,7 +25,7 @@
   <nav class="navbar">
     <div class="container nav-container">
       <div class="logo">
-        <img src="logo.png" alt="SaXhamOps Shield" class="logo-img">
+        <i class="fas fa-shield-alt" style="font-size: 2.2rem; color: #6db33f;"></i>
         <span class="logo-text">SaXham<span class="highlight">Ops</span></span>
       </div>
       
@@ -268,18 +270,18 @@
           <div class="form-row">
             <div class="form-group">
               <label>Your Name</label>
-              <input type="text" id="name" placeholder="Ex: Harshad Mehta" required>
+              <input type="text" id="name" placeholder="Ex: Rahul Sharma" required>
             </div>
             <div class="form-group">
               <label>Company / Firm Name</label>
-              <input type="text" id="company" placeholder="Ex: Grow More Trading Solutions" required>
+              <input type="text" id="company" placeholder="Ex: Alpha Trading Solutions" required>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label>Mobile Number</label>
-              <input type="tel" id="mobile" placeholder="+91 98*** ***10" required>
+              <input type="tel" id="mobile" placeholder="+91 98765 43210" required>
             </div>
             <div class="form-group">
               <label>Interested In</label>
@@ -315,14 +317,12 @@
     document.getElementById('enquiryForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      // 1. Get Values
       const name = document.getElementById('name').value;
       const company = document.getElementById('company').value;
       const mobile = document.getElementById('mobile').value;
       const interest = document.getElementById('interest').value;
       const message = document.getElementById('message').value;
       
-      // 2. Format Email Body
       const subject = `Enquiry: ${interest} - ${company}`;
       const body = `Hi Team SaXhamOps,%0D%0A%0D%0A` +
                    `I am interested in: ${interest}%0D%0A%0D%0A` +
@@ -333,7 +333,6 @@
                    `Message: ${message}%0D%0A%0D%0A` +
                    `Please send me more details and pricing.`;
 
-      // 3. Open Mail Client
       window.location.href = `mailto:founder@saxhamai.com?subject=${subject}&body=${body}`;
     });
   </script>
@@ -343,7 +342,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo">
-             <img src="logo.png" alt="SaXhamOps" class="logo-img" style="height: 28px;">
+             <i class="fas fa-shield-alt" style="font-size: 1.8rem; color: #6db33f;"></i>
              <span class="logo-text" style="font-size: 1.4rem;">SaXham<span class="highlight">Ops</span></span>
           </div>
           <p style="margin-top: 10px;">Daily IT Ops. Simplified.</p>
