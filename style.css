@@ -459,3 +459,13 @@ ul { list-style: none; }
   
   .footer-grid { flex-direction: column; }
 }
+
+/* =========================================
+   11. ACCESSIBILITY (Reduced Motion)
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
