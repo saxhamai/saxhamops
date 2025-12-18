@@ -125,9 +125,14 @@ ul { list-style: none; }
   gap: 12px;
 }
 
+/* UPDATED LOGO STYLING */
 .logo-img {
-  height: 40px; 
+  height: 45px; /* Fixed height */
   width: auto;
+  background-color: #ffffff; /* White background for logo visibility */
+  padding: 4px 8px;          /* Padding to prevent text touching borders */
+  border-radius: 6px;        /* Rounded corners for badge look */
+  box-shadow: 0 0 15px rgba(109, 179, 63, 0.2); /* Soft green glow */
 }
 
 .logo-text {
