@@ -11,6 +11,19 @@ body {
   background: #ffffff;
 }
 
+/* HEADER */
+.header {
+  padding: 18px 20px;
+  text-align: center;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header img {
+  height: 46px;
+}
+
+/* HERO */
 .hero {
   background: #020617;
   color: #ffffff;
@@ -34,6 +47,7 @@ body {
   margin-top: 30px;
 }
 
+/* BUTTONS */
 .btn {
   display: inline-block;
   padding: 12px 22px;
@@ -54,6 +68,7 @@ body {
   color: #22c55e;
 }
 
+/* SECTIONS */
 .section {
   padding: 70px 20px;
   text-align: center;
@@ -68,6 +83,7 @@ body {
   background: #f8fafc;
 }
 
+/* LISTS */
 .points {
   max-width: 600px;
   margin: auto;
@@ -78,6 +94,7 @@ body {
   margin-bottom: 10px;
 }
 
+/* CARDS */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -113,6 +130,7 @@ body {
   color: #475569;
 }
 
+/* STEPS */
 .steps {
   max-width: 500px;
   margin: auto;
@@ -123,6 +141,7 @@ body {
   margin-bottom: 10px;
 }
 
+/* FOOTER */
 footer {
   background: #020617;
   color: #cbd5f5;
@@ -130,4 +149,3 @@ footer {
   text-align: center;
   font-size: 0.9rem;
 }
-
